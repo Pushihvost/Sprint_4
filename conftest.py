@@ -2,8 +2,8 @@ import pytest
 
 @pytest.fixture
 def book_with_genre():
-    name = "Êîò Ñàéìîíà"
-    genre = "Êîìåäèè"
+    name = "Кот Саймона"
+    genre = "Комедии"
     books = BooksCollector()
     books.add_new_book(name)
     books.set_book_genre(name, genre)
@@ -14,10 +14,10 @@ def books_full():
     books = BooksCollector()
 
     data = [
-        ("Êîò Ñàéìîíà", "Êîìåäèè"),
-        ("Êîñìîïñèõîëóõè", "Êîìåäèè"),
-        ("Äðàêóëà", "Óæàñû"),
-        ("Äþíà", "Ôàíòàñòèêà"),
+        ("Кот Саймона", "Комедии"),
+        ("Космопсихолухи", "Комедии"),
+        ("Дракула", "Ужасы"),
+        ("Дюна", "Фантастика"),
     ]
 
     for name, genre in data:
@@ -28,8 +28,8 @@ def books_full():
 
 @pytest.fixture
 def book_add_in_favorite():
-    name = "Êîò Ñàéìîíà"
-    genre = "Êîìåäèè"
+    name = "Кот Саймона"
+    genre = "Комедии"
 
     books = BooksCollector()
 
