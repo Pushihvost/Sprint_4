@@ -1,12 +1,16 @@
 import pytest
 
 @pytest.fixture
-def book_with_genre():
-    name = "Кот Саймона"
-    genre = "Комедии"
+def book_without_genre():
     books = BooksCollector()
-    books.add_new_book(name)
-    books.set_book_genre(name, genre)
+    books.add_new_book("Кот Саймона")
+    return books
+
+
+@pytest.fixture
+def book_with_genre(book_without_genre):
+    books = book_without_genre
+    books.set_book_genre("Кот Саймона", "Комедии")
     return books
 
 @pytest.fixture
