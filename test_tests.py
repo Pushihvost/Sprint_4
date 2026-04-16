@@ -3,7 +3,7 @@ import pytest
 
 class TestBooksCollector():
     
-    def test_init_sets_default_values():
+    def test_init_sets_default_values(self):
         books = BooksCollector()
 
         assert books.books_genre == {}
@@ -17,29 +17,36 @@ class TestBooksCollector():
         books.add_new_book(name)
         assert books.books_genre == {}
 
-    def test_set_book_genre_sets_correct_genre(self, book_with_genre):
-
-        assert book_with_genre.books_genre == {"Кот Саймона": "Комедии"}
-
-    def test_get_book_genre_returns_correct_genre(self, book_with_genre):
+    def test_set_book_genre_sets_correct_genre(self, book_without_genre):
         
-        assert book_with_genre.get_book_genre("Кот Саймона") == "Комедии"
+        book_without_genre.set_book_genre("Кот Саймона","Комедии")
+
+        assert book_without_genre.books_genre == {"Кот Саймона": "Комедии"}
+
+    def test_get_book_genre_returns_correct_genre(self, book_without_genre):
+        
+        book_without_genre.set_book_genre("Кот Саймона", "Комедии")
+
+        assert book_without_genre.get_book_genre("Кот Саймона") == "Комедии"
 
     def test_get_books_with_specific_genre_returns_two_comedy_books(self, books_full):       
 
         assert books_full.get_books_with_specific_genre("Комедии") == ["Кот Саймона", "Космопсихолухи"]
 
-    def test_get_books_genre_returns_correct_dictionary(self, book_with_genre):
+    def test_get_books_genre_returns_correct_dictionary(self, book_without_genre): 
+        book_without_genre.set_book_genre("Кот Саймона", "Комедии")
 
-        assert book_with_genre.get_books_genre() == {"Кот Саймона":"Комедии"}                                                     
+        assert book_without_genre.get_books_genre() == {"Кот Саймона": "Комедии"}                                                     
 
     def test_get_books_for_children_excludes_age_restricted_genres(self, books_full):
 
         assert books_full.get_books_for_children() == ["Кот Саймона","Космопсихолухи", "Дюна"]
 
-    def test_add_book_in_favorites_adds_book(self, book_add_in_favorite):
-
-        assert book_add_in_favorite.favorites == ["Кот Саймона"]
+    def test_add_book_in_favorites_adds_book(self, book_with_genre): 
+        
+        book_with_genre.add_book_in_favorites("Кот Саймона")
+        
+        assert book_with_genre.favorites == ["Кот Саймона"]
 
     def test_add_book_in_favorites_no_duplicates(self, book_add_in_favorite):
 
