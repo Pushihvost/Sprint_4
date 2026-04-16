@@ -27,14 +27,7 @@ def books_full():
     return books
 
 @pytest.fixture
-def book_add_in_favorite():
-    name = "Кот Саймона"
-    genre = "Комедии"
-
-    books = BooksCollector()
-
-    books.add_new_book(name)
-    books.set_book_genre(name, genre)
-    books.add_book_in_favorites(name)
-
+def book_add_in_favorite(book_with_genre):
+    books = book_with_genre
+    books.add_book_in_favorites("Кот Саймона")
     return books
